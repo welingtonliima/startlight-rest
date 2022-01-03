@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: starlight-postgres
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: starlight
+      POSTGRES_USER: starlight_manut
+      POSTGRES_PASSWORD: starlight_manut
+      DB_PASSWORD_ADM: starlight_adm
+      DB_PASSWORD_APP: starlight_app
+      LC_ALL: 'pt_BR.UTF-8'
+      TZ: America/Sao_Paulo
+    ports:
+      - 5432:5432
+    volumes:
+      - ./database/data:/var/lib/postgresql/data
+      - ./docker/postgres/scripts/:/docker-entrypoint-initdb.d
